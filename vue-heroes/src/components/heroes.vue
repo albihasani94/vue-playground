@@ -7,13 +7,15 @@
       <div class="column is-8">
         <div class="card edit-detail">
           <header class="card-header">
-            <p class="card-header-title"></p>
+            <!-- Using interpolation -->
+            <p class="card-header-title">{{ hero.firstName }}</p>
+            <!-- same as v-text="hero.firstName" -->
           </header>
           <div class="card-content">
             <div class="content">
               <div class="field">
                 <label class="label" for="id">id</label>
-                <label class="input" id="id" readonly></label>
+                <label class="input" id="id" readonly>{{ hero.id }}</label>
               </div>
               <div class="field">
                 <label class="label" for="firstName">first name</label>
@@ -76,7 +78,7 @@
             </button>
           </footer>
         </div>
-        <div class="notification is-info"></div>
+        <div class="notification is-info">{{ message }}</div>
       </div>
     </div>
   </div>
@@ -85,5 +87,19 @@
 <script>
 export default {
   name: 'Heroes',
+  data() {
+    return {
+      hero: {
+        id: 1,
+        firstName: 'Bruce',
+        lastname: 'Wayne',
+        description: 'Depressed',
+        capeColor: 'Black',
+        power: 'Being dark',
+        active: true,
+      },
+      message: 'Gotham',
+    };
+  },
 };
 </script>
