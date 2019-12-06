@@ -10,60 +10,79 @@
         </header>
         <ul class="list is-hoverable">
           <li v-for="hero in heroes" :key="hero.id">
-            <a class="list-item">
+            <a
+              class="list-item"
+              @click="selectedHero = hero"
+              :class="{'is-active': selectedHero === hero}"
+            >
               <span>{{ hero.firstName }}</span>
             </a>
           </li>
         </ul>
       </div>
     </div>
-    <div class="columns">
+    <div class="columns" v-if="selectedHero">
       <div class="column is-8">
         <div class="card edit-detail">
           <header class="card-header">
             <!-- Using interpolation -->
-            <p class="card-header-title">{{ hero.firstName }}</p>
-            <!-- same as v-text="hero.firstName" -->
+            <p class="card-header-title">{{ selectedHero.firstName }}</p>
+            <!-- same as v-text="selectedHero.firstName" -->
           </header>
           <div class="card-content">
             <div class="content">
               <div class="field">
                 <label class="label" for="id">id</label>
-                <label class="input" id="id" readonly>{{ hero.id }}</label>
+                <label class="input" id="id" readonly>{{ selectedHero.id }}</label>
               </div>
               <div class="field">
                 <label class="label" for="firstName">first name</label>
-                <input class="input" id="firstName" v-model="hero.firstName"/>
+                <input class="input" id="firstName" v-model="selectedHero.firstName" />
               </div>
               <div class="field">
                 <label class="label" for="lastName">last name</label>
-                <input class="input" id="lastName" v-model="hero.lastName" />
+                <input class="input" id="lastName" v-model="selectedHero.lastName" />
               </div>
               <div class="field">
                 <label class="label" for="description">description</label>
-                <textarea class="input" id="description" type="text" v-model="hero.description" />
+                <textarea
+                  class="input"
+                  id="description"
+                  type="text"
+                  v-model="selectedHero.description"
+                />
               </div>
               <div class="field">
                 <label class="label">cape color</label>
                 <label class="radio" for="color-red">
-                  <input type="radio" id="color-red" value="red" v-model="hero.capeColor" />
+                  <input type="radio" id="color-red" value="red" v-model="selectedHero.capeColor" />
                   red
                 </label>
                 <label class="radio" for="color-blue">
-                  <input type="radio" id="color-blue" value="blue" v-model="hero.capeColor" />
+                  <input type="radio" id="color-blue" value="blue" v-model="selectedHero.capeColor" />
                   blue
                 </label>
                 <label class="radio" for="color-black">
-                  <input type="radio" id="color-black" value="black" v-model="hero.capeColor" />
+                  <input
+                    type="radio"
+                    id="color-black"
+                    value="black"
+                    v-model="selectedHero.capeColor"
+                  />
                   black
                 </label>
-                <div class="color-line" :style="{ 'background-color': hero.capeColor }"></div>
+                <div class="color-line" :style="{ 'background-color': selectedHero.capeColor }"></div>
               </div>
               <div class="field">
                 <label for="power">
                   super power
                   <div class="select is-primary">
-                    <select id="power" v-model="hero.power" @keyup.esc="clearPower" :class="{ invalid: !hero.power }">
+                    <select
+                      id="power"
+                      v-model="selectedHero.power"
+                      @keyup.esc="clearPower"
+                      :class="{ invalid: !selectedHero.power }"
+                    >
                       <option disabled value>Please select one</option>
                       <option>Speed</option>
                       <option>Flight</option>
@@ -76,7 +95,12 @@
               <div class="field">
                 <label class="checkbox" for="active">
                   active
-                  <input type="checkbox" class="is-primary" id="active" v-model="hero.active"/>
+                  <input
+                    type="checkbox"
+                    class="is-primary"
+                    id="active"
+                    v-model="selectedHero.active"
+                  />
                 </label>
               </div>
             </div>
@@ -94,7 +118,9 @@
             </button>
           </footer>
         </div>
-        <div class="notification is-info"><pre>{{ message }}</pre></div>
+        <div class="notification is-info">
+          <pre>{{ message }}</pre>
+        </div>
       </div>
     </div>
   </div>
@@ -105,16 +131,17 @@ export default {
   name: 'Heroes',
   data() {
     return {
-      hero: {
-        id: 1,
-        firstName: 'Bruce',
-        lastName: 'Wayne',
-        description: 'Depressed',
-        capeColor: 'black',
-        power: '',
-        active: true,
-      },
+      selectedHero: undefined,
       heroes: [
+        {
+          id: 1,
+          firstName: 'Bruce',
+          lastName: 'Wayne',
+          description: 'Depressed',
+          capeColor: 'black',
+          power: '',
+          active: true,
+        },
         {
           id: 10,
           firstName: 'Ella',
@@ -148,10 +175,10 @@ export default {
       this.message = '';
     },
     saveHero() {
-      this.message = JSON.stringify(this.hero, null, '\n');
+      this.message = JSON.stringify(this.selectedHero, null, '\n');
     },
     clearPower() {
-      this.hero.power = '';
+      this.selectedHero.power = '';
     },
   },
 };
