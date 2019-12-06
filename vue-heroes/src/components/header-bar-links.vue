@@ -3,15 +3,17 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
+          <!-- full signature -->
           <a
-            href="https://github.com/johnpapa/vue-getting-started"
+            v-bind:href="github"
             target="_blank"
             rel="noopener noreferrer"
           >
             <i class="fab fa-github fa-2x" aria-hidden="true"></i>
           </a>
+          <!-- shortcut signature -->
           <a
-            href="https://twitter.com/john_papa"
+            :href="twitter"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -22,3 +24,14 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  name: "HeaderBarLinks",
+  data() {
+    return {
+      github: "https://github.com/albihasani94",
+      twitter: "https://twitter.com/albihasani94"
+    }
+  }
+}
+</script>
