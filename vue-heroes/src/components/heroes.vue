@@ -4,6 +4,20 @@
       <h2 class="title">Heroes</h2>
     </div>
     <div class="columns">
+      <div class="column is-3">
+        <header class="card-header">
+          <p class="card-header-title">heroes list</p>
+        </header>
+        <ul class="list is-hoverable">
+          <li v-for="hero in heroes" :key="hero.id">
+            <a class="list-item">
+              <span>{{ hero.firstName }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="columns">
       <div class="column is-8">
         <div class="card edit-detail">
           <header class="card-header">
@@ -100,6 +114,32 @@ export default {
         power: '',
         active: true,
       },
+      heroes: [
+        {
+          id: 10,
+          firstName: 'Ella',
+          lastName: 'Papa',
+          description: 'fashionista',
+        },
+        {
+          id: 20,
+          firstName: 'Madelyn',
+          lastName: 'Papa',
+          description: 'the cat whisperer',
+        },
+        {
+          id: 30,
+          firstName: 'Haley',
+          lastName: 'Papa',
+          description: 'pen wielder',
+        },
+        {
+          id: 40,
+          firstName: 'Landon',
+          lastName: 'Papa',
+          description: 'arc trooper',
+        },
+      ],
       message: 'Gotham',
     };
   },
