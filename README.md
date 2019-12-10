@@ -163,3 +163,19 @@ export default {
     },
 };
 ```
+
+## Rendering lists
+
+- v-for="item in itemList" :key="item.id"
+
+```html
+<li v-for="hero in heroes" :key="hero.id">
+    <a class="list-item"
+        @click="selectedHero = hero"
+        :class="{'is-active': selectedHero === hero}">
+        <span>{{ hero.firstName }}</span>
+    </a>
+</li>
+```
+
+> Bind to a unique :key for faster rendering
