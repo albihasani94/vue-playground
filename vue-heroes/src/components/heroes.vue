@@ -4,7 +4,7 @@
       <h2 class="title">Heroes</h2>
     </div>
     <div class="columns">
-      <div class="column is-3">
+      <div class="column is-3" v-show="heroes.length">
         <header class="card-header">
           <p class="card-header-title">heroes list</p>
         </header>
@@ -19,6 +19,9 @@
             </a>
           </li>
         </ul>
+      </div>
+      <div class="notification is-info" v-show="message">
+        <pre>{{ message }}</pre>
       </div>
     </div>
     <div class="columns" v-if="selectedHero">
@@ -42,11 +45,7 @@
               <div class="field">
                 <label for="show" class="checkbox">
                   show more
-                  <input 
-                    type="checkbox" 
-                    class="is-primary" 
-                    id="show" 
-                    v-model="showMore" />
+                  <input type="checkbox" class="is-primary" id="show" v-model="showMore" />
                 </label>
               </div>
               <div class="field" v-show="showMore">
@@ -128,63 +127,64 @@
             </button>
           </footer>
         </div>
-        <div class="notification is-info">
-          <pre>{{ message }}</pre>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+const ourHeroes = [
+  {
+    id: 1,
+    firstName: 'Bruce',
+    lastName: 'Wayne',
+    description: 'Depressed',
+    capeColor: 'black',
+    power: '',
+    active: true,
+  },
+  {
+    id: 10,
+    firstName: 'Ella',
+    lastName: 'Papa',
+    description: 'fashionista',
+  },
+  {
+    id: 20,
+    firstName: 'Madelyn',
+    lastName: 'Papa',
+    description: 'the cat whisperer',
+  },
+  {
+    id: 30,
+    firstName: 'Haley',
+    lastName: 'Papa',
+    description: 'pen wielder',
+  },
+  {
+    id: 40,
+    firstName: 'Landon',
+    lastName: 'Papa',
+    description: 'arc trooper',
+  },
+];
 export default {
   name: 'Heroes',
   data() {
     return {
       selectedHero: undefined,
       showMore: false,
-      heroes: [
-        {
-          id: 1,
-          firstName: 'Bruce',
-          lastName: 'Wayne',
-          description: 'Depressed',
-          capeColor: 'black',
-          power: '',
-          active: true,
-        },
-        {
-          id: 10,
-          firstName: 'Ella',
-          lastName: 'Papa',
-          description: 'fashionista',
-        },
-        {
-          id: 20,
-          firstName: 'Madelyn',
-          lastName: 'Papa',
-          description: 'the cat whisperer',
-        },
-        {
-          id: 30,
-          firstName: 'Haley',
-          lastName: 'Papa',
-          description: 'pen wielder',
-        },
-        {
-          id: 40,
-          firstName: 'Landon',
-          lastName: 'Papa',
-          description: 'arc trooper',
-        },
-      ],
-      message: 'Gotham',
+      heroes: [],
+      message: '',
     };
   },
   computed: {
     fullName() {
       return `${this.selectedHero.firstName} ${this.selectedHero.lastName}`;
     },
+  },
+  created() {
+    this.loadHeroes();
   },
   methods: {
     cancelHero() {
@@ -195,6 +195,17 @@ export default {
     },
     clearPower() {
       this.selectedHero.power = '';
+    },
+    async getHeroes() {
+      return new Promise(resolve => {
+        setTimeout(() => resolve(ourHeroes), 1500);
+      });
+    },
+    async loadHeroes() {
+      this.heroes = [];
+      this.message = 'Getting the heroes, please be patient.';
+      this.heroes = await this.getHeroes();
+      this.message = '';
     },
   },
 };
