@@ -193,3 +193,24 @@ export default {
 ```html
 <div class="field" v-show="showMore">
 ```
+
+## Computed properties
+
+- They fire when any dependency value changes
+
+```html
+<p class="card-header-title">{{ fullName }}</p>
+```
+
+- Computed
+
+```js
+export default {
+  name: 'Heroes',
+  data() {},
+  computed: {
+    fullName() {
+      return `${this.selectedHero.firstName} ${this.selectedHero.lastName}`;
+    },
+  },
+```
