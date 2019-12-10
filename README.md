@@ -65,7 +65,7 @@ npm run build
 </div>
 ```
 
-### Data
+- Data
 
 ```js
 export default {
@@ -84,5 +84,41 @@ export default {
       message: 'Gotham',
     };
   },
+};
+```
+
+## Event handling
+
+- Full signature
+
+```html
+<button class="link card-footer-item cancel-button" v-on:click="cancelHero">
+    <i class="fas fa-undo"></i>
+    <span>Cancel</span>
+</button>
+```
+
+- Shortcut
+
+```html
+<button class="link card-footer-item" @click="saveHero">
+    <i class="fas fa-save"></i>
+    <span>Save</span>
+</button>
+```
+
+- Data
+
+```js
+export default {
+    name: 'Heroes',
+    data(){},
+    methods: {
+        cancelHero() {
+            this.message = '';
+        },
+        saveHero() {
+            this.message = JSON.stringify(this.selectedHero, null, '\n');
+    },
 };
 ```
