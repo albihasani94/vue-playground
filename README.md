@@ -122,3 +122,14 @@ export default {
     },
 };
 ```
+
+## Two-way binding
+
+- v-model
+
+```html
+<div class="field">
+    <label class="label" for="firstName">first name</label>
+    <input class="input" id="firstName" v-model="selectedHero.firstName" />
+</div>
+```
