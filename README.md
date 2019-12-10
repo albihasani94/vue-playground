@@ -107,7 +107,7 @@ export default {
 </button>
 ```
 
-- Data
+- Methods
 
 ```js
 export default {
