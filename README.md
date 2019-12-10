@@ -133,3 +133,33 @@ export default {
     <input class="input" id="firstName" v-model="selectedHero.firstName" />
 </div>
 ```
+
+## Key modifiers and class bindings
+
+- @keyup.esc
+
+```html
+<select
+    id="power"
+    v-model="selectedHero.power"
+    @keyup.esc="clearPower"
+    :class="{ invalid: !selectedHero.power }"
+>
+```
+
+> :class = "{ classname: expression }"
+
+- Methods
+
+```js
+export default {
+    name: 'Heroes',
+    data(){},
+    methods: {
+        // ...
+        clearPower() {
+            this.selectedHero.power = '';
+        },
+    },
+};
+```
