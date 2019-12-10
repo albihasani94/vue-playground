@@ -179,3 +179,17 @@ export default {
 ```
 
 > Bind to a unique :key for faster rendering
+
+## Conditions
+
+- v-if (*will not render the section at all*)
+
+```html
+<div class="columns" v-if="selectedHero">
+```
+
+- v-show (*will still render*)
+
+```html
+<div class="field" v-show="showMore">
+```
