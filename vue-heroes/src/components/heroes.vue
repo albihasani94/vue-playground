@@ -26,8 +26,8 @@
         <div class="card edit-detail">
           <header class="card-header">
             <!-- Using interpolation -->
-            <p class="card-header-title">{{ selectedHero.firstName }}</p>
-            <!-- same as v-text="selectedHero.firstName" -->
+            <p class="card-header-title">{{ fullName }}</p>
+            <!-- same as v-text="fullName" -->
           </header>
           <div class="card-content">
             <div class="content">
@@ -180,6 +180,11 @@ export default {
       ],
       message: 'Gotham',
     };
+  },
+  computed: {
+    fullName() {
+      return `${this.selectedHero.firstName} ${this.selectedHero.lastName}`;
+    },
   },
   methods: {
     cancelHero() {
