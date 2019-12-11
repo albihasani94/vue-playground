@@ -214,3 +214,42 @@ export default {
     },
   },
 ```
+
+## Lifecycle hooks
+
+- beforeCreate, created, beforeMounted, mounted, beforeUpdate, updated, beforeDestroy, destroyed
+
+```js
+created() {
+    this.getHeroes().then(heroes => {
+        this.heroes = heroes;
+    }),
+},
+```
+
+## Watching properties
+
+```js
+watch: {
+    hero(newValue, oldValue) {
+        console.log(`old=${oldValue}, new=${newValue}`);
+    },
+},
+```
+
+## Filters
+
+```html
+{{ firstName | capitalize }}
+```
+
+```js
+filters: {
+    capitalize: function(value) {
+        // process and return
+    },
+},
+```
+
+- can be chained
+- can be parametrized
