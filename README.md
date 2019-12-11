@@ -253,3 +253,114 @@ filters: {
 
 - can be chained
 - can be parametrized
+
+## Components
+
+- Declaration
+
+```js
+export default {
+  name: 'HeroDetail',
+  props: {
+    hero: {
+      type: Object,
+      default: () => {},
+    },
+  },
+};
+```
+
+- Usage
+
+```html
+<HeroDetail v-if="selectedHero" :hero="selectedHero" />
+```
+
+```js
+import HeroDetail from '@/components/hero-detail';
+
+export default {
+  name: 'Heroes',
+  data(){},
+  components: {
+    HeroDetail,
+  },
+};
+```
+
+## Communication from child to parent
+
+- Child
+
+```html
+<button class="link card-footer-item" @click="saveHero()">
+    <i class="fas fa-save"></i>
+    <span>Save</span>
+</button>
+```
+
+```js
+export default {
+  name: 'HeroDetail',
+    methods: {
+        saveHero() {
+            this.$emit('save', this.clonedHero);
+        },
+    },
+};
+```
+
+- Parent
+
+```html
+<HeroDetail v-if="selectedHero" :hero="selectedHero"
+    @cancel="cancelHero" @save="saveHero" />
+```
+
+```js
+export default {
+    name: 'Heroes',
+    methods: {
+        saveHero(hero) {
+            const index = this.heroes.findIndex(h => h.id === hero.id);
+            this.heroes.splice(index, 1, hero);
+            this.heroes = [...this.heroes];
+            this.selectedHero = undefined;
+        },
+    },
+};
+```
+
+## Mixins and modules
+
+- distribute reusable functionality across components
+
+- some-mixin.js
+
+```js
+export const sharedHooks = {
+    created() {
+        console.log('helloooo from mixin');
+    }
+}
+```
+
+- mixin users
+
+```js
+import { sharedHooks } from '../shared';
+
+export default {
+    name: 'HeroDetail',
+    mixins: [sharedHooks],
+};
+```
+
+The shared module should export this logic
+
+```js
+export * from './my-mixins';
+```
+
+- Methods, components, computed, and data are merged. Component's own set takes precedence
+- Watch and hooks both run. Mixins take precedence.
