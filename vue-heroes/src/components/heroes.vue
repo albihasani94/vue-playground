@@ -30,43 +30,9 @@
 </template>
 
 <script>
-import { sharedHooks } from '../shared';
+import { sharedHooks, data } from '../shared';
 import HeroDetail from '@/components/hero-detail';
-const ourHeroes = [
-  {
-    id: 1,
-    firstName: 'Bruce',
-    lastName: 'Wayne',
-    description: 'Depressed',
-    capeColor: 'black',
-    power: '',
-    active: true,
-  },
-  {
-    id: 10,
-    firstName: 'Ella',
-    lastName: 'Papa',
-    description: 'fashionista',
-  },
-  {
-    id: 20,
-    firstName: 'Madelyn',
-    lastName: 'Papa',
-    description: 'the cat whisperer',
-  },
-  {
-    id: 30,
-    firstName: 'Haley',
-    lastName: 'Papa',
-    description: 'pen wielder',
-  },
-  {
-    id: 40,
-    firstName: 'Landon',
-    lastName: 'Papa',
-    description: 'arc trooper',
-  },
-];
+
 export default {
   name: 'Heroes',
   data() {
@@ -80,8 +46,8 @@ export default {
     HeroDetail,
   },
   mixins: [sharedHooks],
-  created() {
-    this.loadHeroes();
+  async created() {
+    await this.loadHeroes();
     console.log('hello from heroes [created]');
   },
   methods: {
@@ -97,15 +63,10 @@ export default {
     clearPower() {
       this.selectedHero.power = '';
     },
-    async getHeroes() {
-      return new Promise(resolve => {
-        setTimeout(() => resolve(ourHeroes), 1500);
-      });
-    },
     async loadHeroes() {
       this.heroes = [];
       this.message = 'Getting the heroes, please be patient.';
-      this.heroes = await this.getHeroes();
+      this.heroes = await data.getHeroes();
       this.message = '';
     },
   },

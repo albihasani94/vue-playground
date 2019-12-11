@@ -19,6 +19,10 @@
                 <input class="input" id="firstName" v-model="clonedHero.firstName" />
               </div>
               <div class="field">
+                <label class="label" for="originDate">origin date</label>
+                <input type="date" class="input" id="originDate" v-model="clonedHero.originDate" />
+              </div>
+              <div class="field">
                 <label for="show" class="checkbox">
                   show more
                   <input type="checkbox" class="is-primary" id="show" v-model="showMore" />
@@ -30,7 +34,12 @@
               </div>
               <div class="field" v-show="showMore">
                 <label class="label" for="description">description</label>
-                <textarea class="input" id="description" type="text" v-model="clonedHero.description" />
+                <textarea
+                  class="input"
+                  id="description"
+                  type="text"
+                  v-model="clonedHero.description"
+                />
               </div>
               <div class="field">
                 <label class="label">cape color</label>
@@ -70,7 +79,12 @@
               <div class="field">
                 <label class="checkbox" for="active">
                   active
-                  <input type="checkbox" class="is-primary" id="active" v-model="clonedHero.active" />
+                  <input
+                    type="checkbox"
+                    class="is-primary"
+                    id="active"
+                    v-model="clonedHero.active"
+                  />
                 </label>
               </div>
             </div>
@@ -95,6 +109,7 @@
 
 <script>
 import { sharedHooks } from '../shared';
+import { format } from 'date-fns';
 
 export default {
   name: 'HeroDetail',
@@ -112,17 +127,15 @@ export default {
   },
   methods: {
     cancelHero() {
-      // this.hero = undefined;
       this.$emit('cancel');
     },
     saveHero() {
-      // this.message = JSON.stringify(this.clonedHero, null, '\n');
       this.$emit('save', this.clonedHero);
     },
   },
   mixins: [sharedHooks],
-  created () {
-      console.log('hello from hero-detail [created]');
+  created() {
+    console.log('hello from hero-detail [created]');
   },
   computed: {
     fullName() {
