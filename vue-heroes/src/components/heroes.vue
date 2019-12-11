@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { sharedHooks } from '../shared';
 import HeroDetail from '@/components/hero-detail';
 const ourHeroes = [
   {
@@ -78,8 +79,10 @@ export default {
   components: {
     HeroDetail,
   },
+  mixins: [sharedHooks],
   created() {
     this.loadHeroes();
+    console.log('hello from heroes [created]');
   },
   methods: {
     cancelHero() {

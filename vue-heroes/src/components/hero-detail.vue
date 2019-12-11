@@ -94,6 +94,8 @@
 </template>
 
 <script>
+import { sharedHooks } from '../shared';
+
 export default {
   name: 'HeroDetail',
   props: {
@@ -117,6 +119,10 @@ export default {
       // this.message = JSON.stringify(this.clonedHero, null, '\n');
       this.$emit('save', this.clonedHero);
     },
+  },
+  mixins: [sharedHooks],
+  created () {
+      console.log('hello from hero-detail [created]');
   },
   computed: {
     fullName() {
