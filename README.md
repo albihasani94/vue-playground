@@ -11,7 +11,7 @@ My vue theme park.
 - Vetur and Vue Snippts for VSCode
 
   - [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
-  - [Vue Snippets for VSCode](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)
+  - [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)
 
 - Vue dev tools browser extensions
 
