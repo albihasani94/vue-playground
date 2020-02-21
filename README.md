@@ -364,3 +364,9 @@ export * from './my-mixins';
 
 - Methods, components, computed, and data are merged. Component's own set takes precedence
 - Watch and hooks both run. Mixins take precedence.
+
+## Accessing Data
+
+## Routing
+
+## State Management
